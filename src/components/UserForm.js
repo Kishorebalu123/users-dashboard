@@ -10,11 +10,19 @@ const UserForm = ({ onSubmit, initialData, onCancel }) => {
   } = useForm();
 
   useEffect(() => {
+    // Reset form to initialData or clear fields if no initial data
     reset(initialData || { firstName: '', lastName: '', email: '', department: '' });
   }, [initialData, reset]);
 
+  const handleFormSubmit = (data) => {
+    onSubmit(data); // Call parent submit handler
+    if (!initialData) {
+      reset(); // Clear form only if it's a new user
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="card p-3">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="card p-3">
       <h5>{initialData ? 'Edit User' : 'Add User'}</h5>
 
       {/* First Name */}

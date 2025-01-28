@@ -11,14 +11,13 @@ const UserManagement = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        // Simulated users with all required fields
         const response = await api.get('/users');
         const enrichedUsers = response.data.map((user) => ({
           id: user.id,
-          firstName: `First${user.id}`, // Simulated First Name
-          lastName: `Last${user.id}`,  // Simulated Last Name
+          firstName: `First${user.id}`, 
+          lastName: `Last${user.id}`,  
           email: user.email,
-          department: 'Engineering',  // Simulated Department
+          department: 'Engineering',  
         }));
         setUsers(enrichedUsers);
       } catch (err) {
